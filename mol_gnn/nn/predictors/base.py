@@ -1,11 +1,9 @@
-from mol_gnn.nn.loss import LossFunction
-from mol_gnn.utils import ClassRegistry, HasHParams
-
+from abc import abstractmethod
 
 from torch import Tensor, nn
 
-
-from abc import abstractmethod
+from mol_gnn.nn.loss import LossFunction
+from mol_gnn.utils import ClassRegistry, HasHParams
 
 
 class Predictor(nn.Module, HasHParams):
