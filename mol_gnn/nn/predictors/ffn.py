@@ -1,4 +1,3 @@
-from abc import abstractmethod
 
 from lightning.pytorch.core.mixins import HyperparametersMixin
 import torch
@@ -9,11 +8,9 @@ from mol_gnn.nn.ffn import MLP
 from mol_gnn.nn.loss import *
 from mol_gnn.nn.metrics import *
 from mol_gnn.conf import DEFAULT_HIDDEN_DIM
-from mol_gnn.utils import ClassRegistry, HasHParams
+from mol_gnn.nn.predictors.base import Predictor, PredictorRegistry
 
 __all__ = [
-    "Predictor",
-    "PredictorRegistry",
     "RegressionFFN",
     "MveFFN",
     "EvidentialFFN",
@@ -24,33 +21,6 @@ __all__ = [
     "MulticlassDirichletFFN",
     "SpectralFFN",
 ]
-
-
-class Predictor(nn.Module, HasHParams):
-    r"""A :class:`Predictor` is a protocol that defines a differentiable function
-    :math:`f : \mathbb R^d \mapsto \mathbb R^o"""
-
-    input_dim: int
-    """the input dimension"""
-    output_dim: int
-    """the output dimension"""
-    n_tasks: int
-    """the number of tasks `t` to predict for each input"""
-    n_targets: int
-    """the number of targets `s` to predict for each task `t`"""
-    criterion: LossFunction
-    """the loss function to use for training"""
-
-    @abstractmethod
-    def forward(self, Z: Tensor) -> Tensor:
-        pass
-
-    @abstractmethod
-    def train_step(self, Z: Tensor) -> Tensor:
-        pass
-
-
-PredictorRegistry = ClassRegistry[Predictor]()
 
 
 class _FFNPredictorBase(Predictor, HyperparametersMixin):
