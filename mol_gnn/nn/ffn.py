@@ -17,7 +17,7 @@ class FFN(nn.Module):
 
 
 class MLP(nn.Sequential, FFN):
-    r"""An :class:`MLP` is an FFN that implements the following function:
+    r"""An :class:`MLP` is an :class:`FFN` that implements the following function:
 
     .. math::
         \mathbf h_0 &= \mathbf x\,\mathbf W^{(0)} + \mathbf b^{(0)} \\

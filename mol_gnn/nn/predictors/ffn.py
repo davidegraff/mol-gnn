@@ -25,7 +25,7 @@ __all__ = [
 
 class _FFNPredictorBase(Predictor, HyperparametersMixin):
     """A :class:`_FFNPredictorBase` is the base class for all :class:`Predictor`s that use an
-    underlying :class:`SimpleFFN` to map the learned fingerprint to the desired output."""
+    underlying :class:`MLP` to map the learned fingerprint to the desired output."""
 
     _default_criterion: LossFunction
     _default_metric: Metric
